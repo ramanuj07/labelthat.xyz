@@ -1,17 +1,15 @@
 import express from "express";
-const app = express();
+import cors from "cors";
+import userRouter from "./routers/user";
+import workerRouter from "./routers/worker";
 const PORT = 3000;
 
+const app = express();
+
 app.use(express.json());
+app.use(cors());
 
-app.get("/generatePresignedUrl", (req, res) => {});
-
-app.post("/task", (req, res) => {});
-
-app.get("/task", (req, res) => {
-  return res.json({
-    data: "this is the next big thing",
-  });
-});
+app.use("/v1/user", userRouter);
+app.use("/v1/worker", workerRouter);
 
 app.listen(PORT);
